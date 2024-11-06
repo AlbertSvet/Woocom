@@ -1,5 +1,8 @@
 Проект интернет-магазина на WooCommerce с кастомизацией темы.
 
+https://drive.google.com/file/d/19q7kByuG6vaBAjHhSgmFV4PfT1VMyURp/view?usp=sharing
+
+
 -Вывод категорий товаров
 
 -Мини-корзина
