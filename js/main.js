@@ -1,3 +1,5 @@
+
+
 jQuery(document).ready(function ($) {
     "use strict";
     
@@ -73,6 +75,32 @@ jQuery(document).ready(function ($) {
             }
         }
     });
+    // recent-product
+    $('.recent-product').owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: false,
+        autoplay: true,
+        autoplayTimeout: 2000,
+        smartSpeed: 1000,
+        responsive: {
+            0:{
+                items:2
+            },
+            576:{
+                items:3
+            },
+            768:{
+                items:4
+            },
+            992:{
+                items:4
+            },
+            1200:{
+                items:4
+            }
+        }
+    });
 
 
     // Related carousel
@@ -99,21 +127,60 @@ jQuery(document).ready(function ($) {
     });
 
 
+
+
     // Product Quantity
-    $('.quantity button').on('click', function () {
-        var button = $(this);
-        var oldValue = button.parent().parent().find('input').val();
-        if (button.hasClass('btn-plus')) {
-            var newVal = parseFloat(oldValue) + 1;
-        } else {
-            if (oldValue > 0) {
-                var newVal = parseFloat(oldValue) - 1;
+ 
+        $('main.main').on('click', '.quantity button', function () {
+            var button = $(this);
+            var oldValue = button.parent().parent().find('input').val();
+            if (button.hasClass('btn-plus')) {
+                var newVal = parseFloat(oldValue) + 1;
             } else {
-                newVal = 0;
+                if (oldValue > 0) {
+                    var newVal = parseFloat(oldValue) - 1;
+                } else {
+                    newVal = 0;
+                }
             }
-        }
-        button.parent().parent().find('input').val(newVal);
-    });
+            button.parent().parent().find('input').val(newVal);
+            $('.updateCart').prop('disabled', false);
+        });
+   
     
+    
+    
+    try{
+        const btnConvas = document.querySelector('.offcanvas');
+        const btnOpen = document.querySelector('.p-1');
+        const btnClose = document.querySelector('.btn-close');
+        
+        btnClose.addEventListener('click', () =>{
+            btnConvas.classList.remove('showTwo');
+        })
+        btnOpen.addEventListener('click', () =>{
+            if (btnConvas.classList.contains('showTwo')) {
+                // Если корзина открыта, закрываем ее
+                btnConvas.classList.remove('showTwo');
+            } else {
+                // Если корзина закрыта, открываем ее
+                btnConvas.classList.add('showTwo');
+            }
+        })
+
+        // https://gist.github.com/bagerathan/2b57e7413bfdd09afa04c7be8c6a617f
+        $('body').on('adding_to_cart', function (e, btn, data) {
+            btn.closest('.product-item').find('.ajax-loader').fadeIn();
+        });
+
+        $('body').on('added_to_cart', function (e, response_fragments, response_cart_hash, btn) {
+            btn.closest('.product-item').find('.ajax-loader').fadeOut();
+        });
+    }catch(er){
+      
+    }
 });
+
+
+
 

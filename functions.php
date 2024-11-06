@@ -51,3 +51,16 @@ require_once get_template_directory() . '/incs/class-wooeshop-header.php';
 require_once get_template_directory() . '/incs/costamazer.php';
 require_once get_template_directory() . '/incs/cpt.php';
 
+add_action('widgets_init', function() {
+    register_sidebar(
+		array(
+			'name'          => __( 'Sidebar', 'wooeshop' ),
+			'id'            => 'sidebar-1',
+			'description'   => __( 'Add widgets here to appear in your sidebar.', 'wooeshop' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+});

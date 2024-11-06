@@ -73,7 +73,8 @@
                 </a>
             </div>
             <div class="col-lg-4 col-6 text-left">
-                <form action="">
+                <?php aws_get_search_form( true ); ?>
+                <!-- <form action="">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for products">
                         <div class="input-group-append">
@@ -82,7 +83,7 @@
                             </span>
                         </div>
                     </div>
-                </form>
+                </form> -->
             </div>
             <div class="col-lg-4 col-6 text-right">
                 
@@ -145,31 +146,48 @@
                             'walker' => new Wooeshop_Header(),
 								
 				            )); ?>	
-                            <!-- <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="shop.html" class="nav-item nav-link">Shop</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down mt-1"></i></a>
-                                <div class="dropdown-menu bg-primary rounded-0 border-0 m-0">
-                                    <a href="cart.html" class="dropdown-item">Shopping Cart</a>
-                                    <a href="checkout.html" class="dropdown-item">Checkout</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a> -->
+                           
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="" class="btn px-0">
                                 <i class="fas fa-heart text-primary"></i>
                                 <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
                             </a>
-                            <a href="" class="btn px-0 ml-3">
-                                <i class="fas fa-shopping-cart text-primary"></i>
-                                <span class="badge text-secondary border border-secondary rounded-circle" style="padding-bottom: 2px;">0</span>
-                            </a>
+                                <?php if(! is_cart()): ?>
+                                    <button class="btn p-1" id="cart-open" type="button" >
+                                        <i class="fas fa-shopping-cart text-primary"></i>
+                                        <span class="badge text-secondary border border-secondary rounded-circle cart-bage" style="padding-bottom: 2px;">                                
+                                            <?php echo WC()->cart->get_cart_contents_count(); ?>
+                                            <?php //echo count( WC()->cart->get_cart() ); ?>
+                                        </span>
+                                    </button>
+                                <?php endif; ?>
+                           
                         </div>
                     </div>
                 </nav>
             </div>
         </div>
+         <!-- mini -->
+          <?php if( ! is_cart() ): ?>
+            <div class="offcanvas offcanvas-end" tabindex="-1">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasCartLabel">Cart</h5>
+                            <button type="button" class="btn-close">&times;</button>
+                        </div>
+
+                        <div class="offcanvas-body">
+
+                                <!--
+                                https://woocommerce.github.io/code-reference/packages/WooCommerce.html
+                                https://woocommerce.com/document/show-cart-contents-total/
+                                -->
+                            <?php woocommerce_mini_cart(); ?>
+                        </div>
+            </div>
+            <?php endif; ?>
+    </div>
+     
+   
     </div>
     <!-- Navbar End -->

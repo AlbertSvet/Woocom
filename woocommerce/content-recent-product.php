@@ -22,13 +22,10 @@ global $product;
 // Ensure visibility.
 if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
-
 }
-$product_classes = (is_front_page() || is_search() || is_product()) ? 'col-lg-3 col-md-4 col-sm-6 pb-1' : 'col-lg-4 col-sm-6 mb-3';
-
 ?>
-<div <?php wc_product_class( $product_classes, $product ); ?>>
-	<div class="product-item bg-light mb-4">
+<div <?php wc_product_class( 'product-item bg-light mb-4', $product ); ?>>
+
 		<div class="ajax-loader">
 			<img src="<?php echo get_template_directory_uri(); ?>/img/ripple.svg" alt="">
 		</div>
@@ -97,5 +94,5 @@ $product_classes = (is_front_page() || is_search() || is_product()) ? 'col-lg-3 
 			?>
 
 		</div> <!-- text-center py-4 -->
-	</div> <!-- product-item bg-light mb-4 -->
-</div> <!-- col-lg-3 col-md-4 col-sm-6 pb-1 -->
+	
+</div> <!-- product-item bg-light mb-4 -->
